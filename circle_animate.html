@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>canvas 1</title>
+    <style>
+      * {
+        margin: 0;
+      }
+
+      canvas {
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas></canvas>
+
+    <script>
+      var canvas = document.querySelector("canvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      var c = canvas.getContext("2d");
+
+      //rectangle
+      c.fillStyle = "yellow";
+      c.fillRect(50, 50, 100, 100);
+
+      //line
+      c.beginPath();
+      c.moveTo(50, 300);
+      c.lineTo(100, 200);
+      c.lineTo(70, 450);
+      c.strokeStyle = "red";
+      c.stroke();
+
+      //arc
+
+      for (var i = 1; i <= 3; ++i) {
+        c.beginPath();
+        var x = Math.floor(Math.random() * window.innerWidth);
+        var y = Math.floor(Math.random() * window.innerWidth);
+        c.arc(x, y, 30, 0, Math.PI * 2, false);
+        c.stroke();
+      }
+
+      var x = 50;
+      var y = 10;
+      var dx = 4;
+      var dy = 4;
+      var radius = 30;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        c.clearRect(0, 0, innerHeight, innerWidth); // it is for clearing the shape
+        c.beginPath();
+        c.arc(x, y, radius, 0, Math.PI * 2, false);
+        c.strokeStyle = "blue";
+        c.stroke();
+
+        if (x + radius > innerWidth || x - radius < 0) {
+          dx = -dx;
+        }
+        x += dx; // this is for inc or dec the speed
+
+        if (y + radius > innerWidth || y - radius < 0) {
+          dy = -dy;
+        }
+        y += dy; // this is for inc or dec the speed
+
+        //console.log("apcn");
+      } // it is a loop
+
+      animate();
+    </script>
+  </body>
+</html>
